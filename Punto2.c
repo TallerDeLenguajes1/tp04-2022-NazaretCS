@@ -117,3 +117,22 @@ int ConsultarTareas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int 
     }
     return realizdas;   
 }
+
+
+void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas){
+
+    printf("\n\nTareas Realizadadas\n");
+    for (int i = 0; i < realizadas; i++)
+    {
+        MostrarTarea(*ArregloTareasRealizadas[i]);
+    }
+
+    printf("\n\nTareas Incompletas\n");
+    for (int i = 0; i < CantTareas; i++)
+    {
+        if (ArregloTareas[i] != NULL)
+        {
+            MostrarTarea(*ArregloTareas[i]);
+        }        
+    }
+}
