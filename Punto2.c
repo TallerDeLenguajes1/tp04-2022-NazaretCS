@@ -14,7 +14,7 @@ int SolicitarCantidadTareas();
 void CargarTareas( Tarea **ArregloTareas, int CantTareas);
 
 int main(void){
-    int CantTareas;
+    int CantTareas, realizadas;
     Tarea **ArregloTareas, **ArregloTareasRealizadas; 
 
 
@@ -33,6 +33,9 @@ int main(void){
     
     ArregloTareasRealizadas = (Tarea **) malloc(CantTareas * sizeof(Tarea*));  //Genera arreglo del mismo tamaño que el anterior, donde se almacenaran las tareas ya realizadas
     
+    realizadas = ConsultarTareas(ArregloTareas, ArregloTareasRealizadas, CantTareas);
+
+
 
     return 0;
 }
@@ -84,3 +87,33 @@ void MostrarTarea(Tarea Tarea){
     puts(Tarea.Descripcion);
     printf("Duracion de la Tarea: %d \n", Tarea.Duracion);
 } 
+
+int ConsultarTareas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas){
+    
+    int respuesta=2, realizdas=0;
+
+    for (int i = 0; i < CantTareas; i++)
+    {
+        MostrarTarea(*ArregloTareas[i]);
+        do
+        {
+            printf("\n Si la tarea Mostrada ya fue realizada por favor ingrese  1, en caso contrario ingrese 0\n\n");
+            scanf("%d",respuesta);
+            if (respuesta != 1 || respuesta != 0)
+            {
+                printf("El valor ingresado no corresponde con lo solicitado, por favor intentelo nuevamente\n");
+            }
+            
+        } while (respuesta != 1 && respuesta != 0);
+        
+        if (respuesta == 1)
+        {
+            ArregloTareasRealizadas[realizdas] = ArregloTareas[i];
+            ArregloTareas[i] = NULL;  //Como paso la tarea realizada a un nuevo arreglo, coloco en la posicion donde se encontraba esta un NULL
+            realizdas++;
+        }
+        
+
+    }
+    return realizdas;   
+}
