@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<string.h>
+
+
+typedef struct Tarea {
+    int TareaID; //Numerado en ciclo iterativo
+    char *Descripcion; //
+    int Duracion; // entre 10 – 100
+}Tarea;
+
+int SolicitarCantidadTareas();
+void CargarTareas( Tarea **ArregloTareas, int CantTareas);
+
+int main(void){
+    int CantTareas;
+    Tarea **ArregloTareas, **ArregloTareasRealizadas; 
+
+
+    CantTareas = SolicitarCantidadTareas();
+    ArregloTareas = (Tarea **) malloc(CantTareas * sizeof(Tarea*));
+
+    CargarTareas(ArregloTareas, CantTareas);
+
+
+    printf("\n\nMostrado de las Tareas A realizarse:\n");
+    for (int i = 0; i < CantTareas; i++)
+    {
+        MostrarTarea(*ArregloTareas[i]);
+    }
+    printf("\nFin del mostrado de Tareas.\n\n");
+    
+    ArregloTareasRealizadas = (Tarea **) malloc(CantTareas * sizeof(Tarea*));  //Genera arreglo del mismo tamaño que el anterior, donde se almacenaran las tareas ya realizadas
+    
+
+    return 0;
+}
+
+
+
+//Funcion para pedir la cantidad de tareas, corrovorando que no sea un numero negativo.
+int SolicitarCantidadTareas(){
+    int CantTareas;
+    do
+    {   
+        printf("Ingrese la Cantdad de tareas que desea cargar: \n");
+        scanf("%d",&CantTareas);
+        if (CantTareas<0)
+        {
+            printf("el numero ingresao no puede ser negativo, por favor intentelo nuevamente...\n");
+        }
+        
+    } while (CantTareas<0);
+    return CantTareas;
+}
+
+void CargarTareas( Tarea **ArregloTareas, int CantTareas){
+
+    char *buff = (char *) malloc(sizeof(char)*100);
+
+    for (int i = 0; i < CantTareas; i++)
+    {
+        ArregloTareas[i] = (Tarea *) malloc(sizeof(Tarea)); //Almaceno un espacio de memoria dinamica para los elementos de cada tarea
+
+        ArregloTareas[i]->TareaID = i+1;
+
+        printf("Ingrese una descripcion de la tarea: \n");
+        gets(buff);
+        ArregloTareas[i]->Descripcion = (char *) malloc((strlen(buff))+1 ); //Almaceno un espacio en memoria para guardar la descripcion de la tarea
+        strcpy(ArregloTareas[i]->Descripcion, buff);
+
+        ArregloTareas[i]->Duracion = rand() % (100 -10 ) + 10;
+
+    }
+    free(buff);
+    
+}
+
+void MostrarTarea(Tarea Tarea){
+    printf("Mostrado de la Tarea: %d ---------\n", Tarea.TareaID);
+    printf(" ID: %d\n",Tarea.TareaID);
+    printf("Descripcion de La Tare: ");
+    puts(Tarea.Descripcion);
+    printf("Duracion de la Tarea: %d \n", Tarea.Duracion);
+} 
