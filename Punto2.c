@@ -128,11 +128,48 @@ void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTa
     }
 
     printf("\n\nTareas Incompletas\n");
-    for (int i = 0; i < CantTareas; i++)
+    for (int j = 0; j < CantTareas; j++)
     {
-        if (ArregloTareas[i] != NULL)
+        if (ArregloTareas[j] != NULL)
         {
-            MostrarTarea(*ArregloTareas[i]);
+            MostrarTarea(*ArregloTareas[j]);
         }        
+    }
+}
+
+void BuscarTarea(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas){
+
+    int buscar=-1;
+
+    do
+    {
+        printf("\nIngrese el ID de la Tarea que desea uvicar: \n");
+        scanf("%d",&buscar);
+        if (buscar<=0 && buscar>CantTareas)
+        {
+            printf("El valor ingresado no se encuentra en el rango de tareas existentes... Por favor intente nuevamente\n");
+        }
+        
+    } while (buscar<=0 && buscar>CantTareas);   
+    
+
+    for (int i = 0; i < realizadas; i++)
+    {        
+        if (ArregloTareasRealizadas[i]->TareaID == buscar)
+        {
+            printf("\nTarea Localizada:\n\n");
+            MostrarTarea(*ArregloTareasRealizadas[i]);
+            printf("\nEstado de la Tarea: Realizada\n");
+        }
+    }
+
+    for (int j = 0; j < CantTareas; j++)
+    {        
+        if (ArregloTareas[j]->TareaID == buscar && ArregloTareas[j] != NULL) 
+        {
+            printf("\nTarea Localizada:\n\n");
+            MostrarTarea(*ArregloTareas[j]);
+            printf("\nEstado de la Tarea: No Realizada\n");
+        }
     }
 }
