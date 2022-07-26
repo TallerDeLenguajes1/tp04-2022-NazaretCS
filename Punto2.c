@@ -12,7 +12,11 @@ typedef struct Tarea {
 
 int SolicitarCantidadTareas();
 void CargarTareas( Tarea **ArregloTareas, int CantTareas);
+void MostrarTarea(Tarea Tarea);
+int ConsultarTareas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas);
+void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
 void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, int CantTareas, int realizadas, char *busqueda);
+void BuscarTareaID(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
 
 int main(void){
     int CantTareas, realizadas;
@@ -158,6 +162,43 @@ void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, in
         {
             mostrarTarea(*ArregloTarasRealizadas[i]);
             printf("\n Estado de la Tarea: Completada\n");
+        }
+    }
+}
+
+void BuscarTareaID(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas){
+
+    int buscar=-1;
+
+    do
+    {
+        printf("\nIngrese el ID de la Tarea que desea uvicar: \n");
+        scanf("%d",&buscar);
+        if (buscar<=0 && buscar>CantTareas)
+        {
+            printf("El valor ingresado no se encuentra en el rango de tareas existentes... Por favor intente nuevamente\n");
+        }
+        
+    } while (buscar<=0 && buscar>CantTareas);   
+    
+
+    for (int i = 0; i < realizadas; i++)
+    {        
+        if (ArregloTareasRealizadas[i]->TareaID == buscar)
+        {
+            printf("\nTarea Localizada:\n\n");
+            MostrarTarea(*ArregloTareasRealizadas[i]);
+            printf("\nEstado de la Tarea: Realizada\n");
+        }
+    }
+
+    for (int j = 0; j < CantTareas; j++)
+    {        
+        if (ArregloTareas[j]->TareaID == buscar && ArregloTareas[j] != NULL) 
+        {
+            printf("\nTarea Localizada:\n\n");
+            MostrarTarea(*ArregloTareas[j]);
+            printf("\nEstado de la Tarea: No Realizada\n");
         }
     }
 }
