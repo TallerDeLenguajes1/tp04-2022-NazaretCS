@@ -42,7 +42,8 @@ int main(void){
 
     BuscaTareaPalabra(ArregloTareas, ArregloTareasRealizadas, CantTareas, realizadas, "Contar");
 
-
+    LiberarMemoria(ArregloTareas, CantTareas);
+    LiberarMemoria(ArregloTareasRealizadas, realizadas);
     return 0;
 }
 
@@ -151,7 +152,7 @@ void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, in
     {
         if(ArregloTareas[j]!=NULL && strstr(ArregloTareas[j]->Descripcion,busqueda)!=NULL)
         {
-            mostrarTarea(*ArregloTareas[j]);
+            MostrarTarea(*ArregloTareas[j]);
             printf("\n Estado de la Tarea: Incompleta\n");
         }
     }
@@ -160,7 +161,7 @@ void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, in
     {
         if(strstr(ArregloTarasRealizadas[i]->Descripcion,busqueda)!=NULL)
         {
-            mostrarTarea(*ArregloTarasRealizadas[i]);
+            MostrarTarea(*ArregloTarasRealizadas[i]);
             printf("\n Estado de la Tarea: Completada\n");
         }
     }
@@ -201,4 +202,18 @@ void BuscarTareaID(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int C
             printf("\nEstado de la Tarea: No Realizada\n");
         }
     }
+}
+
+
+void LiberarMemoria(Tarea **ArregloTareas, int cantidad)
+{
+    for(int i=0; i < cantidad; i++)
+    {
+        if (ArregloTareas[i]!=NULL)
+        {
+            free(ArregloTareas[i]->Descripcion); 
+        }
+        free(ArregloTareas[i]);
+    }
+    free(ArregloTareas);
 }
