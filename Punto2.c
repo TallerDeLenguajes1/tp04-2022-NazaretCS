@@ -17,6 +17,7 @@ int ConsultarTareas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int 
 void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
 void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, int CantTareas, int realizadas, char *busqueda);
 void BuscarTareaID(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
+void LiberarMemoria(Tarea **ArregloTareas, int cantidad);
 
 int main(void){
     int CantTareas, realizadas;
