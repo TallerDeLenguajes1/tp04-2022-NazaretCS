@@ -12,6 +12,7 @@ typedef struct Tarea {
 
 int SolicitarCantidadTareas();
 void CargarTareas( Tarea **ArregloTareas, int CantTareas);
+void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, int CantTareas, int realizadas, char *busqueda);
 
 int main(void){
     int CantTareas, realizadas;
@@ -134,5 +135,28 @@ void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTa
         {
             MostrarTarea(*ArregloTareas[i]);
         }        
+    }
+}
+
+
+void BuscaTareaPalabra(Tarea **ArregloTareas, Tarea **ArregloTarasRealizadas, int CantTareas, int realizadas, char *busqueda)
+{
+
+    for(int j = 0; j < CantTareas; j++)
+    {
+        if(ArregloTareas[j]!=NULL && strstr(ArregloTareas[j]->Descripcion,busqueda)!=NULL)
+        {
+            mostrarTarea(*ArregloTareas[j]);
+            printf("\n Estado de la Tarea: Incompleta\n");
+        }
+    }
+
+    for(int i = 0; i < realizadas; i++)
+    {
+        if(strstr(ArregloTarasRealizadas[i]->Descripcion,busqueda)!=NULL)
+        {
+            mostrarTarea(*ArregloTarasRealizadas[i]);
+            printf("\n Estado de la Tarea: Completada\n");
+        }
     }
 }
