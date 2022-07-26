@@ -12,6 +12,11 @@ typedef struct Tarea {
 
 int SolicitarCantidadTareas();
 void CargarTareas( Tarea **ArregloTareas, int CantTareas);
+void BuscarTarea(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
+void MostrarTarea(Tarea Tarea);
+int ConsultarTareas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas);
+void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas);
+
 
 int main(void){
     int CantTareas, realizadas;
@@ -137,7 +142,7 @@ void MostrarTareasPendientesYRealizadas(Tarea **ArregloTareas, Tarea **ArregloTa
     }
 }
 
-void BuscarTarea(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas){
+void BuscarTareaID(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int CantTareas, int realizadas){
 
     int buscar=-1;
 
@@ -173,3 +178,4 @@ void BuscarTarea(Tarea **ArregloTareas, Tarea **ArregloTareasRealizadas, int Can
         }
     }
 }
+
